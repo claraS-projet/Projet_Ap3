@@ -1,0 +1,22 @@
+#load "btreeP.com";;
+open BtreeP;;
+
+(*Calcul de la taille de l'arbre*)
+let rec size tree =
+  match tree with
+  |Empty -> 0
+  |Node {_; left; right} -> 1 + size left + size right
+
+(*Calcul de la hauteur de l'arbre*)
+let rec height tree =
+  match tree with
+  |Empty -> 0
+  |Node {_; left; right} -> 1 + max (height left) (height right)
+
+let rec to_string tree =
+  match tree with
+  |Empty -> ()
+  |Node {value; left; right} -> Printf.sprintf"( %d %s %s )"
+ value
+ to_string left
+ to_string right
