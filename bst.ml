@@ -1,5 +1,6 @@
 #load "btreeP.cmo";;
 open BtreeP;;
+#show BtreeP
 
 let rec bst_seek tree myval =
   match tree with
@@ -29,3 +30,15 @@ let bst_lbuild (mylist : int list) : t_btree =
   done;
   arbre
 ;;
+
+let rec bst_delete_aux (tree, myval, treeli : t_btree * int * int list) : int list =
+  match tree with
+  | Empty -> []
+  | Node { myval; left; right } -> bst_delete_aux tree myval treeli
+  | Node { x; left; right} -> bst_delete_aux tree myval x::treeli
+;;
+  
+let bst_delete (tree, myval : t_btree * int) : t_btree =
+  let newli : int list = bst_delete_aux tree myval [] in
+  bst_lbuild newli;;
+  

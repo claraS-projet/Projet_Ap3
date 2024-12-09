@@ -1,6 +1,6 @@
 #load "btreeP.cmo";;
-open BtreeP
-
+open BtreeP;;
+#show BtreeP
 (*Calcul de la taille de l'arbre*)
 let rec size (tree : t_btree) : int =
   match tree with
